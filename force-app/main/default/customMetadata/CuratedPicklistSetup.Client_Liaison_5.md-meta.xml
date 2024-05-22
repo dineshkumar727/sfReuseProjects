@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Client Liaison_5</label>
+    <protected>false</protected>
+    <values>
+        <field>CategoryDescription__c</field>
+        <value xsi:type="xsd:string">Client Management</value>
+    </values>
+    <values>
+        <field>Category__c</field>
+        <value xsi:type="xsd:string">Client Management</value>
+    </values>
+    <values>
+        <field>SubcategoryDescription__c</field>
+        <value xsi:type="xsd:string">Client Maintenance</value>
+    </values>
+    <values>
+        <field>Subcategory__c</field>
+        <value xsi:type="xsd:string">Client Maintenance</value>
+    </values>
+    <values>
+        <field>Detail__c</field>
+        <value xsi:type="xsd:string">Five</value>
+    </values>
+    <values>
+        <field>UserTitle__c</field>
+        <value xsi:type="xsd:string">Client Liaison</value>
+    </values>
+</CustomMetadata>
