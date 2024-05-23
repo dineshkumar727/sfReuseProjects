@@ -1,5 +1,5 @@
 <template>
-    <c-modal header='Create a Property Contact'  onclosedialog={handleCloseModal} >
+    <c-modal header='Create a Case'  onclosedialog={handleCloseModal} >
         <lightning-quick-action-panel title="Quick Action Title" >        
             <lightning-record-edit-form onsuccess={handleSuccess} onsubmit={handleSubmit} onerror={handleError} style="height:600px"
             onload={handleLoad} object-api-name="Case" form-class="slds-m-around_small"	layout-type="Full" > 

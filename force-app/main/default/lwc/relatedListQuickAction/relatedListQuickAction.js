@@ -18,6 +18,8 @@ export default class relatedListQuickAction extends NavigationMixin(LightningEle
     pickListOptions = [];
     isBuildingIdDisabled = false;
     submitOnce = true;
+    subject;
+    phone;
     value;
     accountId;
     @api objectApiName;
@@ -52,9 +54,9 @@ export default class relatedListQuickAction extends NavigationMixin(LightningEle
         
         this.hideModal();
         this.recordId = event.detail.id;
-        let createdRecordName = event.detail.fields.Name.value;       
+        let createdRecordName = event.detail.fields.CaseNumber.value;       
         this.dispatchEvent(new CloseActionScreenEvent());
-        this.hideModal();
+        this.redirectCaseRecord();
         this.dispatchEvent( new CustomEvent("reloadthepage", { detail: { value :'ReLoad' }}));
         this.dispatchEvent(
             new ShowToastEvent({
@@ -66,10 +68,10 @@ export default class relatedListQuickAction extends NavigationMixin(LightningEle
     }
 
     handleSubmit(event) {
-        
         event.preventDefault();       
         const fields = event.detail.fields;    
-        fields.Role__c = this.value;
+        fields.Origin  = 'Phone';
+        fields.Status = 'Working';
         this.template.querySelector('lightning-record-edit-form').submit(fields);
        
      }
@@ -81,8 +83,10 @@ export default class relatedListQuickAction extends NavigationMixin(LightningEle
 
     handleChange(event) {
        
-        this.value = event.detail.value;
+        let rolevalue = event.detail.value;
+        this.subject = rolevalue +'-'+ this.subject;
     }
+
     hideModal() {
         const modal = this.template.querySelector('c-modal');
         modal.hide();
@@ -118,6 +122,17 @@ export default class relatedListQuickAction extends NavigationMixin(LightningEle
         },
     });   
     }
+
+    redirectCaseRecord() {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordPage',
+            attributes: {
+                recordId: this.recordId,
+                actionName: 'view',
+            },
+        });   
+    }
+
     reloadThePage(){
         this[NavigationMixin.Navigate]({
             type: 'standard__webPage',
