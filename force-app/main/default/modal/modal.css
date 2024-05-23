@@ -1,0 +1,13 @@
+.modal-hidden {
+    display: none;
+}
+.slds-modal__content {
+        /*  height: 59% !important;*/
+
+}
+.slds-modal__container{
+    /* width: 60%!important; */
+    /* max-height: 85rem!important;  */
+    max-width: 80rem!important; 
+    height: 110% !important;
+}
