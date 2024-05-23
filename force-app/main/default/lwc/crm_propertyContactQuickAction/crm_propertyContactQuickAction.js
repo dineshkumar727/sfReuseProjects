@@ -4,30 +4,51 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { CloseActionScreenEvent } from 'lightning/actions';
 import { getRecord } from 'lightning/uiRecordApi';
 
-const BUILDINGFIELD = [
-    'Link_Building__c.Name',
-    'Link_Building__c.Property__c'
+const ACCOUNTFIELD = [
+    'Account.Rating',
+    'Account.Phone',
+    'Account.Name',
 ];
 
 export default class PropertyContactQuickAction extends NavigationMixin(LightningElement)  {
-    @api objectApiName;
+
     @api parentId;
+    @api recordId;
     propertyID;
     pickListOptions = [];
     isBuildingIdDisabled = false;
     submitOnce = true;
     value;
+
+    objectName;
+
+
+    @api
+    set objectApiName(objectApiName) {
+        if (objectApiName !== null) {
+            this.objectName = objectApiName;
+
+            if(objectApiName =='Account'){
+                this.IsAccount = true;
+                this.accountId = this.recordId;
+            }else if(objectApiName =='Contact'){
+                this.IsContact = true;
+                this.contactId = this.recordId;
+            }
+       }
+    }
+
+    get roleOptions() {
+        return [
+            {label: 'Property Manager', value: 'Property Manager'},
+            {label: 'Asset Manager', value: 'Asset Manager'},
+            {label: 'Construction Manager', value: 'Construction Manager'},
+            { label: 'Market Officer', value: 'Market Officer' },
+        ];
+    }
     
     connectedCallback(event){
-        if(this.objectApiName =='Link_Building__c'){
-            this.isBuildingIdDisabled = true;
-        }else{
-            this.propertyID = this.parentId;
-        }
-        this.pickListOptions.push({label: 'Asset Manager', value: 'Asset Manager'});
-        this.pickListOptions.push({label: 'Property Manager', value: 'Property Manager'});
-        this.pickListOptions.push({label: 'Construction Manager', value: 'Construction Manager'});
-        this.pickListOptions.push({label: 'Market Officer', value: 'Market Officer'});
+
     }
 
     handleSuccess(event) {
@@ -70,15 +91,17 @@ export default class PropertyContactQuickAction extends NavigationMixin(Lightnin
         modal.hide();
     }
 
-    @wire(getRecord, { recordId: '$parentId', fields: BUILDINGFIELD })
-        getBuildingDetails({error, data}){
+    @wire(getRecord, { recordId: '$accountId', fields: ACCOUNTFIELD })
+        getParentDetails({error, data}){
         if(data){
-            let BuildingName = data.fields.Name.value;
-            this.propertyID = data.fields.Property__c.value;
+            this.subject = data.fields.Name.value;
+            this.phone = data.fields.Phone.value;
+            console.log('parent fields' + data);
         }else if(error){
             this.error = error;
         }
     }
+
     handleError(event) {
         console.log(event.detail);
     }

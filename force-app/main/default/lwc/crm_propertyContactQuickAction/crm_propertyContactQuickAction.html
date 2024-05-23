@@ -2,28 +2,46 @@
     <c-modal header='Create a Property Contact'  onclosedialog={handleCloseModal} >
         <lightning-quick-action-panel title="Quick Action Title" >        
             <lightning-record-edit-form onsuccess={handleSuccess} onsubmit={handleSubmit} onerror={handleError} style="height:600px"
-                    onload={handleLoad} object-api-name="Property_Contacts__c" form-class="slds-m-around_small"	layout-type="Full" > 
-                    <lightning-messages></lightning-messages>
-                        <lightning-layout class="typebox" multiple-rows>
-                            <lightning-layout-item size="6" >
-                            <div class="slds-m-around_medium">                               
-                                <lightning-input-field class="Link_Building__c" field-name="Link_Building__c" value={parentId}  disabled={isBuildingIdDisabled}></lightning-input-field>
-                               
-                                <lightning-input-field class="Link_Property__c" field-name="Link_Property__c" value={propertyID}  disabled="true"></lightning-input-field>                          
-                            </div>
-                            </lightning-layout-item>
-                            <lightning-layout-item size="6" >
-                            <div class="slds-m-around_medium">
-                                <lightning-combobox  name="role" label="Role" value={value} placeholder="Select the Role" options={pickListOptions} onchange={handleChange} variant="label-inline"></lightning-combobox>
-                                                     
-                                <lightning-input-field class="User__c" field-name="User__c" ></lightning-input-field>            
-                            </div>
-                            </lightning-layout-item>                        
-                            <lightning-layout-item size='12' class="slds-align_absolute-center">
-                                <lightning-button label='Save' type="submit" ></lightning-button>
-                            </lightning-layout-item>
-                        </lightning-layout>
-                </lightning-record-edit-form>       
+            onload={handleLoad} object-api-name="Case" form-class="slds-m-around_small"	layout-type="Full" > 
+            <lightning-messages></lightning-messages>
+                  <lightning-layout class="typebox" horizontal-align="center">
+                    <div class="slds-m-around_medium">                               
+                    <lightning-layout-item size="6" >
+                        <lightning-input-field class="AccountId" field-name="AccountId" value={accountId}  disabled={IsAccount}></lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" >
+                        <lightning-input-field class="ContactId" field-name="ContactId" value={contactId}  disabled={IsContact}></lightning-input-field>                          
+                    </lightning-layout-item>
+                    </div>
+                    </lightning-layout>
+
+                    <lightning-layout class="typebox" horizontal-align="center" multiple-rows="true">
+                      <div class="slds-m-around_medium">                               
+                        <lightning-layout-item size="6" >
+                            <lightning-input-field class="Subject" field-name="Subject" value={subject}></lightning-input-field>    
+                         </lightning-layout-item> 
+                         <lightning-layout-item size="6" >
+                            <lightning-input-field class="Phone" field-name="SuppliedPhone" value={phone}></lightning-input-field>            
+                        </lightning-layout-item> 
+                    </div>
+                    </lightning-layout>  
+
+                    <lightning-layout class="typebox" horizontal-align="center" multiple-rows="true">
+                        <div class="slds-m-around_medium">
+                        <lightning-layout-item size="6" >
+                              <lightning-combobox  name="role" label="Role" value={rolevalue} placeholder="Select the Role" options={roleOptions} onchange={handleChange} variant="label-inline"></lightning-combobox>
+                        </lightning-layout-item> 
+                        <lightning-layout-item size="6" >            
+                              <lightning-input-field class="OwnerId" field-name="OwnerId" ></lightning-input-field>            
+                         </lightning-layout-item>
+                     </div>
+                    </lightning-layout> 
+                  <lightning-layout class="typebox" horizontal-align="center" multiple-rows="true">          
+                    <lightning-layout-item size='12' class="slds-align_absolute-center">
+                        <lightning-button label='Save' type="submit" ></lightning-button>
+                    </lightning-layout-item>
+                </lightning-layout>
+        </lightning-record-edit-form>         
         </lightning-quick-action-panel>
     </c-modal>
 </template>
