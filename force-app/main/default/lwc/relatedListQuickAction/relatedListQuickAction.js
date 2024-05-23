@@ -10,7 +10,7 @@ const ACCOUNTFIELD = [
     'Account.Name',
 ];
 
-export default class PropertyContactQuickAction extends NavigationMixin(LightningElement)  {
+export default class relatedListQuickAction extends NavigationMixin(LightningElement)  {
 
     @api parentId;
     @api recordId;
@@ -38,6 +38,11 @@ export default class PropertyContactQuickAction extends NavigationMixin(Lightnin
        }
     }
 
+    get objectApiName(){
+        return this.objectName;
+    }
+
+
     get roleOptions() {
         return [
             {label: 'Property Manager', value: 'Property Manager'},
@@ -45,6 +50,10 @@ export default class PropertyContactQuickAction extends NavigationMixin(Lightnin
             {label: 'Construction Manager', value: 'Construction Manager'},
             { label: 'Market Officer', value: 'Market Officer' },
         ];
+    }
+
+    set roleOptions(obj){
+        
     }
     
     connectedCallback(event){
