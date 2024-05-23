@@ -1,7 +1,9 @@
-<aura:component implements="lightning:isUrlAddressable, force:hasSObjectName, force:hasRecordId, access="global" description="c:relatedList component">
+<aura:component implements="lightning:isUrlAddressable,force:hasSObjectName,force:hasRecordId" access="global" description="c:relatedList component">
     <aura:attribute name="id" type="String" />
+    <aura:attribute name="sObjectName" type="String" default="Account" />
+    <aura:attribute type="Id" name="recordId" />
     <aura:handler name="init" value="{!this}" action="{!c.onPageReferenceChange}"/>
-    <aura:handler name="change" value="{!v.pageReference}" action="{!c.onPageReferenceChange}"/>
-    <c:relatedListQuickAction parentId="{!v.id}">
+    <aura:handler name="change" value="{!v.pageReference}" action="{!c.onPageReferenceChange}" />
+    <c:relatedListQuickAction parentId="{!v.id}" objectApiName="{!v.sObjectName}" recordId="{!v.recordId}">
     </c:relatedListQuickAction>
 </aura:component>

@@ -13,35 +13,14 @@ const ACCOUNTFIELD = [
 export default class relatedListQuickAction extends NavigationMixin(LightningElement)  {
 
     @api parentId;
-    @api recordId;
+    @api recordId; // not getting this id
     propertyID;
     pickListOptions = [];
     isBuildingIdDisabled = false;
     submitOnce = true;
     value;
-
-    objectName;
-
-
-    @api
-    set objectApiName(objectApiName) {
-        if (objectApiName !== null) {
-            this.objectName = objectApiName;
-
-            if(objectApiName =='Account'){
-                this.IsAccount = true;
-                this.accountId = this.recordId;
-            }else if(objectApiName =='Contact'){
-                this.IsContact = true;
-                this.contactId = this.recordId;
-            }
-       }
-    }
-
-    get objectApiName(){
-        return this.objectName;
-    }
-
+    accountId;
+    @api objectApiName;
 
     get roleOptions() {
         return [
@@ -57,6 +36,15 @@ export default class relatedListQuickAction extends NavigationMixin(LightningEle
     }
     
     connectedCallback(event){
+        if (this.objectApiName !== null) {
+            if(this.objectApiName =='Account'){
+                this.IsAccount = true;
+                this.accountId = this.parentId;
+            }else if(this.objectApiName =='Contact'){
+                this.IsContact = true;
+                this.contactId = this.recordId;
+            }
+       }
 
     }
 
